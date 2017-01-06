@@ -1,11 +1,11 @@
 # Site settings
-title: CS231n Convolutional Neural Networks for Visual Recognition
-email: karpathy@cs.stanford.edu
-description: "Course materials and notes for Stanford class CS231n: Convolutional Neural Networks for Visual Recognition."
+title: Notes for ELEG5491: Introduction to Deep Learning
+# email: karpathy@cs.stanford.edu
+description: "Course materials and notes for CUHK ELEG5491: Introduction to Deep Learning."
 baseurl: ""
-url: "http://cs231n.github.io"
-twitter_username: cs231n
-github_username:  cs231n
+url: "http://eleg5491.github.io"
+twitter_username: dl_cuhk
+github_username:  eleg5491
 
 # Build settings
 markdown: kramdown

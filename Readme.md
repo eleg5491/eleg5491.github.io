@@ -1,3 +1,3 @@
 
-Notes and assignments for Stanford CS class [CS231n: Convolutional Neural Networks for Visual Recognition](http://vision.stanford.edu/teaching/cs231n/)
+Notes and assignments for CUHK deep learning course [ELEG5491: Introduction to Deep Learning](http://dl.ee.cuhk.edu.hk/)
 
