@@ -3,7 +3,7 @@ layout: page
 permalink: /ml_basics_backup/
 ---
 
-## Note on Machine Learning Basics
+<!-- ## Note on Machine Learning Basics -->
 
 Table of Contents:
 
