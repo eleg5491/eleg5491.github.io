@@ -1,6 +1,6 @@
 ---
 layout: page
-permalink: /ml_basics/
+permalink: /ml_basics_backup/
 ---
 
 ## Note on Machine Learning Basics
