@@ -41,13 +41,17 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 
 The generalization ability of a machine learning algorithm describes how accurately an algorithm is able to predict outcome values for previously *unseen* data. The generalization error can be minimized by avoiding overfitting in the learning algorithm. A model is said to generalize well if its performance on the test set is high. The dataset for a standard procedure of supervised learning should contain *training*, *validation* and *test* set, where the validation set is for pruning hyperparameters and the test set is for verifying a model's performance and generalization ability.
 
-- An example using training, validation and test sets: [Faster RCNN](https://arxiv.org/abs/1506.01497) (see Sec. 4.2)
+- An example using training, validation and test sets: [Faster RCNN](https://arxiv.org/abs/1506.01497)  (Sec. 4.2)
 
-- Another aspect to describe a model's generalization is to train a network on one dataset and evaluate it directly to another test set which has different classes: see [a paper here](https://arxiv.org/pdf/1606.04446v1.pdf) (Sec. 3.2).
+- Another aspect to describe a model's generalization is to train a network on one dataset and evaluate it directly to another test set which has different classes: see [a paper here](https://arxiv.org/pdf/1606.04446v1.pdf) (Sec. 3.2)
 
 <a name='cross'></a>
 
 #### Relation to cross-validation
+
+To be precise, there's a connection between generalization and stability (via cross-validation) of a learning algorithm.
+If an algorithm is symmetric (the order of inputs does not affect the result), has bounded loss and meets two stability conditions, it will generalize. For details, please refer to [wiki](https://en.wikipedia.org/wiki/Generalization_error). Here we want to point out that in some cases, the generalization of a model could be also reflected by conducting cross-valiation. There are two common types:
+
 
 
 <a name='overfit'></a>
