@@ -48,15 +48,21 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 <a name='overfit'></a>
 
 ### Overfit and underfit
-The overfitting and underfitting problem is a common issue when training deep models. A brief and illustrative example is [here](http://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html).
+The overfitting and underfitting problem is a common issue when training deep models. A brief and illustrative example is [here](http://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html). **Underfiiting** means the model cannot find a solution that fits the training samples well and thus is incapable of capturing the true pattern of data. **Overfitting** refers to the case where the learner fits the training data too well, aka, has larger model capacity; it also captures the data noise and loses the ability to generalize well on test data.
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/overfit_example.png" height="250">
   <div class="figcaption">
-    A 1-D polinomial regression problem.  We calculate the mean squared error (MSE) on the validation set. The higher of MSE, the less likely the model generalizes correctly from the training data.
+    A 1-D polinomial regression problem. Underfit (left), proper fit (middle) and overfit (right). We calculate the mean squared error (MSE) on the validation set. The higher of MSE, the less likely the model generalizes correctly from the training data.
   </div>
 </div>
 
+Below we sum up some reasons and their (possible) solutions to tackle overfit and underfit.
+
+Reasons for underfit:
+
+- Model capacity is not large enough: increase layers, add more neurons, from AlexNet to ResNet, etc.
+- Hard to find global optimum or easy to get stuck at local minimum: 
 
 <a name='summary'></a>
 
@@ -65,7 +71,9 @@ The following figure shows a rough splitup of the feature learning methods, wher
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/feature_learning.png" height="250">
   <div class="figcaption">
-    Taxonomy of feature learning methods. Deep neural networks are of the main interest in this course. Credit from <a href="https://sites.google.com/site/deeplearningcvpr2014/">Honglak Lee's Tutorial</a>.
+    Taxonomy of feature learning methods. 
+    <!-- Deep neural networks are of the main interest in this course.  -->
+    Credit from <a href="https://sites.google.com/site/deeplearningcvpr2014/">Honglak Lee's Tutorial</a>.
   </div>
 </div>
 
