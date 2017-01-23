@@ -48,12 +48,20 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 <a name='overfit'></a>
 
 ### Overfit and underfit
+The overfitting and underfitting problem is a common issue when training deep models. A brief and illustrative example is [here](http://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html).
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/ml/overfit_example.png" height="250">
+  <div class="figcaption">
+    A 1-D polinomial regression problem.  We calculate the mean squared error (MSE) on the validation set. The higher of MSE, the less likely the model generalizes correctly from the training data.
+  </div>
+</div>
 
 
 <a name='summary'></a>
 
 ### Summary
-The following figure shows a rough splitup of the feature learning methods, where CNN and RNN in the supervised domain will be explicitly explored in the following lectures. In essence, deep learning models are just another workaround to provide more powerful representation of features than the traditional counerparts (such as HOG, SIFT, etc.) and based on the expressive and automatic learned features, data patterns (class clustering, for example) can be better distinguished in higher dimensional space. 
+The following figure shows a rough splitup of the feature learning methods, where CNN and RNN in the supervised domain will be explicitly explored in the following lectures. In essence, deep learning models are just another workaround to provide more powerful representation of features than the traditional counterparts (such as HOG, SIFT, etc.) and based on the expressive and automatic learned features, data patterns (class clustering, for example) can be better distinguished in higher dimensional space. 
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/feature_learning.png" height="250">
   <div class="figcaption">
