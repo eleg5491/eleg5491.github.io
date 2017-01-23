@@ -49,8 +49,11 @@ The generalization ability of a machine learning algorithm describes how accurat
 
 #### Relation to cross-validation
 
-To be precise, there's a connection between generalization and stability (via cross-validation) of a learning algorithm.
-If an algorithm is symmetric (the order of inputs does not affect the result), has bounded loss and meets two stability conditions, it will generalize. For details, please refer to [wiki](https://en.wikipedia.org/wiki/Generalization_error). Here we want to point out that in some cases, the generalization of a model could be also reflected by conducting cross-valiation. There are two common types:
+To be precise, there is a connection between generalization and stability (via cross-validation) of a learning algorithm.
+If an algorithm is symmetric (the order of inputs does not affect the result), has bounded loss and meets [two stability conditions](https://en.wikipedia.org/wiki/Generalization_error#Relation_to_stability), it will generalize. For details, please refer to [wiki](https://en.wikipedia.org/wiki/Generalization_error). Here we want to point out that in some cases, the generalization of a model could be also reflected by conducting cross-valiation. There are two common types: (a) Leave-\\(p\\)-out cross-validation, it involves using \\(p\\) observations as the validation set and the remaining observations as the training set. This is repeated on all ways to cut the original sample on a validation set and a training set. 
+(b) \\(k\\)-fold cross-validation, the original samples are *randomly* partitioned into \\(k\\) equal sized subsamples. Of the \\(k\\) subsamples, a single subsample is retained as the validation data for testing the model, and the remaining \\(k − 1\\) subsamples are used as training data. 
+The cross-validation process is then repeated \\(k\\) times (called *folds*). The \\(k\\) results from the folds can then be averaged to produce a single estimation. The advantage of this method is that all observations are used for both training and validation, and each observation is used for validation exactly once. 
+When \\(k = n\\) (the number of observations), the \\(k\\)-fold cross-validation is exactly the leave-one-out cross-validation.
 
 
 
