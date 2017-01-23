@@ -53,12 +53,12 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 <a name='summary'></a>
 
 ### Summary
-The following figure shows a rough splitup of the feature learning methods, where CNN and RNN in the supervised domain will be explicitly explored in the following lectures. In essence, deep learning models are just another workaround to provide more powerful representation of features than the traditional counerparts (such as HOG, SIFT, etc.) and based on the expressive and automatic learned features, data patterns (class clustering, for example) can be better distinguished in higher dimensional space. The general knowledge discussed above are useful throughout this course and must be reflected when we publish professional research papers.
+The following figure shows a rough splitup of the feature learning methods, where CNN and RNN in the supervised domain will be explicitly explored in the following lectures. In essence, deep learning models are just another workaround to provide more powerful representation of features than the traditional counerparts (such as HOG, SIFT, etc.) and based on the expressive and automatic learned features, data patterns (class clustering, for example) can be better distinguished in higher dimensional space. 
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/feature_learning.png" height="250">
   <div class="figcaption">
-    Taxonomy of feature learning methods. Deep neural networks are of the main interest in this course. Credit from [Honglak Lee's Tutorial](https://sites.google.com/site/deeplearningcvpr2014/).
+    Taxonomy of feature learning methods. Deep neural networks are of the main interest in this course. Credit from <a href="https://sites.google.com/site/deeplearningcvpr2014/">Honglak Lee's Tutorial</a>.
   </div>
 </div>
 
-The unsupervised methods will be briefly introduced in the upcoming lecture and you can find a good starting tutorial [here](http://www.uoguelph.ca/~gwtaylor/outbox/gwt_unsupervised_learning.pdf).
+At last, the unsupervised methods will be briefly introduced in the upcoming lecture and you can find a good starting tutorial [here](http://www.uoguelph.ca/~gwtaylor/outbox/gwt_unsupervised_learning.pdf). The general knowledge discussed above are useful throughout this course and must be reflected when we publish professional research papers.
