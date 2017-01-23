@@ -43,7 +43,7 @@ The generalization ability of a machine learning algorithm describes how accurat
 
 - An example using training, validation and test sets: [Faster RCNN](https://arxiv.org/abs/1506.01497) (see Sec. 4.2)
 
-- Another aspect to evaluate the model has good generalization is to train a network on one dataset and use it directly to another test set which has different classes: see [a paper here](https://arxiv.org/pdf/1606.04446v1.pdf) (Sec. 3.2).
+- Another aspect to describe a model's generalization is to train a network on one dataset and evaluate it directly to another test set which has different classes: see [a paper here](https://arxiv.org/pdf/1606.04446v1.pdf) (Sec. 3.2).
 
 <a name='cross'></a>
 
