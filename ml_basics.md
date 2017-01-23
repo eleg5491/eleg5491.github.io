@@ -39,6 +39,11 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 
 ### Generalization
 
+The generalization ability of a machine learning algorithm describes how accurately an algorithm is able to predict outcome values for previously *unseen* data. The generalization error can be minimized by avoiding overfitting in the learning algorithm. A model is said to generalize well if its performance on the test set is high. The dataset for a standard procedure of supervised learning should contain *training*, *validation* and *test* set, where the validation set is for pruning hyperparameters and the test set is for verifying a model's performance and generalization ability.
+
+- An example using training, validation and test sets: [Faster RCNN](https://arxiv.org/abs/1506.01497) (see Sec. 4.2)
+
+- Another aspect to evaluate the model has good generalization is to train a network on one dataset and use it directly to another test set which has different classes: see [a paper here](https://arxiv.org/pdf/1606.04446v1.pdf) (Sec. 3.2).
 
 <a name='cross'></a>
 
