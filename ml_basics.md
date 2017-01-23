@@ -62,7 +62,7 @@ Below we sum up some reasons and their (possible) solutions to tackle overfit an
 Reasons for underfit:
 
 - Model capacity is not large enough: increase layers, add more neurons, from AlexNet to ResNet, etc.
-- Hard to find global optimum or easy to get stuck at local minimum: try another initial point (adjust learning rate, momentum, etc.) or change to learning policy.
+- Hard to find global optimum or easy to get stuck at local minimum: try another initial point (adjust learning rate, momentum, etc.) or change learning policy (SGD, Adam, RMSProp, etc).
 - Improper training logistics: longer iteration, diversity samples of different classes in one iteration.
 
 Reasons for overfit:
@@ -70,10 +70,11 @@ Reasons for overfit:
 - The number of candidate functions to describe the model is too large. Without sufficient data, the learner cannot distinguish which one is the most appropriate one: [increase training data](https://deeplearningmania.quora.com/The-Power-of-Data-Augmentation-2).
 
 - Data is contaminated by noise and the model intends to be complicates in the parameter space: sparsify the network by adding penalty for complexity (known as **regularization**).
-	- An example for linear regression: 
+	- An example for linear regression (L2 norm): 
 	$$
-		L(w, x, y) = \sum_{j\neq y_i} \left[ \max(0, w_j^Tx_i - w_{y_i}^Tx_i + 1) \right]
+		L(w, x, y) = \frac{1}{N}  \sum_{i} \big(  w x_i^{(train)} - y_i^{(train)} \big)^2 + \lambda \| w \| ^2
 	$$ 
+	- There are many other forms of regularization, for example, [Dropout or DropConnect](http://yann.lecun.com/exdb/publis/pdf/wan-icml-13.pdf).
 
 <a name='summary'></a>
 
