@@ -38,13 +38,16 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 ### Cross Entropy
 
 One of the most important thing in deep learning is to minimize the loss from the learned features and its corresponding label. Let \\( x_i \in \mathbb{R}^d \\) be the \\(d\\)-dimension feature of \\(i\\)-th sample in one mini-batch. The weight matrix in the classification layer is denoted as \\( W \in \mathbb{R}^{n \times d} \\), where \\( y_i = Wx_i+b\\). The label of sample \\( x_i \\) is \\( l_i \in \{ 0, 1, \cdots, n-1 \}\\), where \\( n\\) is the number of categories. The [cross entropy](https://en.wikipedia.org/wiki/Cross_entropy) loss, in plain English, measures the difference between two probability distributions \\(p\\) and \\(q\\) over a given set:
+
 $$
 H(p, q) = -\sum_x p(x) \log q(x).
 $$
 
 Putting the cross entropy loss into our notation defined above, it goes like:
 
-
+$$
+L(W, l_i) = -\sum_i \sum_j (t_i)_j \log (\hat{y}_i)_j .
+$$
 
 <a name='generalize'></a>
 
