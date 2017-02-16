@@ -6,6 +6,7 @@ permalink: /ml_basics/
 <!-- ## Note on Machine Learning Basics -->
 
 Initial release: Jan 24, 2017. Hongyang Li.
+Update: Feb 16, 2017. Hongyang Li and Kai Kang. 
 
 Table of Contents:
 
