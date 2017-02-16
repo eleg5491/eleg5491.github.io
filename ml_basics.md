@@ -64,7 +64,8 @@ $$
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/loss.png" height="220">
   <div class="figcaption">
-    The loss expression via a detailed example. Adaption from <a href="http://cs231n.github.io/linear-classify/#svmvssoftmax">a blog</a>. Taking the feature x as input, we have a raw probability output y; the loss descends from a pair (y, label) and could be in various forms (Euclidean, hingeloss, softmax loss, etc.), depending on the input y and label.
+    The loss expression via a detailed example. Adaption from <a href="http://cs231n.github.io/linear-classify/#svmvssoftmax">a blog</a>. Taking the feature 
+    $x$ as input, we have a raw probability output y; the loss descends from a pair (y, label) and could be in various forms (Euclidean, hingeloss, softmax loss, etc.), depending on the input y and label.
   </div>
 </div>
 
