@@ -50,7 +50,14 @@ L(W, x_i, l_i) = - \sum_{j=1}^n (t_i)_j \log (\hat{y}_i)_j,
 $$
 
 where \\(\hat{y}_i \in \mathbb{R}^n\\) is the normalized probability of the output in the classification layer. \\((\cdot)_j\\) denotes the \\( j\\)-th element in a vector. Here \\(t_i \in \mathbb{R}^n\\) is a vectorized target mapping from a single scalar \\(l_i\\). For instance, in the example shown below, sample \\(x_i\\) belongs to class \\(l_i =2\\), thus its target vector is \\(t_i = [0, 0, 1]^T\\). The total loss over a batch \\(\mathcal{B}\\) is just the summation over all samples: \\(\sum_i L(W, x_i, l_i)\\).
-The gradient of \\(L\\) w.r.t. input \\(\hat{y}_i\\) is \\( \frac{\partial L}{\partial \hat{y}_j } = -\frac{t_j}{\hat{y}_j} \\). It is in an element-wise form and we remove the subscript \\(i\\) for brevity. Hope you are not lost with the notations here. :)
+The gradient of \\(L\\) w.r.t. input \\(\hat{y}_i\\) is:
+
+$$
+ \frac{\partial L}{\partial \hat{y}_j } = -\frac{t_j}{\hat{y}_j}. 
+$$
+
+
+ It is in an element-wise form and we remove the subscript \\(i\\) for brevity. Hope you are not lost with the notations here. :)
 
 
 
