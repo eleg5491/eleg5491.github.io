@@ -46,8 +46,10 @@ $$
 Putting the cross entropy loss into our notation defined above, it goes like:
 
 $$
-L(W, l_i) = -\sum_i \sum_j (t_i)_j \log (\hat{y}_i)_j .
+L(W, x_i, l_i) = - \sum_{j=1}^n (t_i)_j \log (\hat{y}_i)_j,
 $$
+
+where \\()\\
 
 <a name='generalize'></a>
 
