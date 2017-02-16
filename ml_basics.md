@@ -158,7 +158,7 @@ The following figure shows a rough splitup of the feature learning methods, wher
 
 At last, the unsupervised methods will be briefly introduced in the upcoming lecture and you can find a good starting tutorial [here](http://www.uoguelph.ca/~gwtaylor/outbox/gwt_unsupervised_learning.pdf). The general knowledge discussed above are useful throughout this course and must be reflected when we publish professional research papers.
 
-
+<br><br><br>
 <div>
   <div id="disqus_thread"></div>
   <script>
