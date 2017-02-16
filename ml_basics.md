@@ -78,13 +78,15 @@ A very similar loss that often confuses beginners is the cross-entropy loss of i
 \hat{y}_i
 \\) is 1, indicating that the sample can belong to one class *only* (the input image is a dog, not a person/cat/desk, etc). It is a **one-of-many** classification problem. In multi-class loss (so I call it!), each element in the probability vector is independent and ranges from 0 to 1 via some mapping: \\(  
 \hat{y}_i = \sigma(y_i) \in \mathbb{R}^n
-\\), where \\(\sigma(\cdot)\\) is a sigmoid function, for instance. Therefore, \\(\hat{y}_i)\\) becomes \\( \hat{y}_i = [0.055, 0.703, 0.569]^T\\); each element could mean whether the sample has person or not, whether the scene is indoor or outdoor, whether the person is laughing or not, etc. It is a **multi-binary** classification problem. Using the notation defined above, the loss and gradient of multi-class are as follows (removing the sample index \\(i\\) for brevity):
+\\), where \\(\sigma(\cdot)\\) is a sigmoid function, for instance. Therefore, \\(\hat{y}_i\\) becomes \\( \hat{y}_i = [0.055, 0.703, 0.569]^T\\); each element could mean whether the sample has person or not, whether the scene is indoor or outdoor, whether the person is laughing or not, etc. It is a **multi-binary** classification problem. Using the notation defined above, the loss and gradient of multi-class are as follows (removing the sample index \\(i\\) for brevity):
 
 $$
 L(W, x, l) = - \sum_{j=1}^n 
-l_j \log \hat{y}_j + \big(1 - l_j \big) \log \big( 1- \hat{y}_j) \big)  \\
-\frac{\partial L}{\partial \hat{y}_j } =
+l_j \log \hat{y}_j + (1 - l_j ) \log ( 1- \hat{y}_j ),  \\
+\frac{\partial L}{\partial y_j } = \frac{\partial L}{\partial \hat{y}_j } \frac{\partial \hat{y}_j}{\partial y_j } = \hat{y}_j - l_j,
 $$
+
+where the label is now in a vector form: \\(l_i \in \mathbb{R}^n\\), with each element \\(l_j\\) being 0 or 1. The vector form of the gradient regarding sample \\(i\\) is \\( \frac{\partial L}{\partial y_i } (\hat{y}_i - l_i) \in \mathbb{R}^n\\). It is a little bit tedious in the derivations above, but we want students to be crystal clear about the gradient flow in each element of the data at the beginning. 
 
 
 
