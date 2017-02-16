@@ -57,12 +57,13 @@ $$
 $$
 
 
- It is in an element-wise form and we remove the subscript \\(i\\) for brevity. Hope you are not lost with the notations here. :) In a general sense, \\(t_j\\) can be continuous; in softmax loss, the target has only one element to be 1 and all the others as zero. That's why you often see the loss over a batch is written as:
+ It is in an element-wise form and we remove the subscript \\(i\\) for brevity. Hope you are not lost with the notations here. :) In a general sense, \\(t_j\\) can be continuous; in softmax loss, the target has only one element to be 1 and all the others as zero. That's why you often see the softmax (cross-entropy) loss over a batch is written as:
 
  $$
- L(W, \mathcal{B}) = - \sum_{i=1} \log \hat{y}_{i l_i}.
+ L(W, \mathcal{B}) = - \sum_{i=1} \log \hat{y}_{i , l_i}.
  $$
-The notation \\(\hat{y}_{i l_i}\\) denotes the single scalar of normalized probability output corresponding to the \\(l_i\\)-th dimension in \\(\hat{y}_i\\), aka, its correct label index.
+
+The notation \\(\hat{y}_{i , l_i}\\) denotes the normalized probability output (scalar) corresponding to the \\(l_i\\)-th dimension in \\(\hat{y}_i\\), a.k.a, its  label index.
 
 
 <div class="fig figcenter fighighlight">
