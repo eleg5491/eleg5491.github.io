@@ -11,7 +11,7 @@ Update: Feb 16, 2017. Hongyang Li and Kai Kang.
 Table of Contents:
 
 - [Introduction](#intro)
-- [Cross Entropy, Log-likelihood](#concept)
+- [Cross Entropy](#concept)
 - [Generalization](#generalize)
   - [Relation to cross-validation](#cross)
 - [Overfit and underfit](#overfit)
@@ -34,7 +34,10 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 
 <a name='concept'></a>
 
-### Cross Entropy and Log-likelihood
+### Cross Entropy
+
+One of the most important thing in deep learning is to minimize the loss from the learned features and its corresponding label. Let \\( f_i \in \mathbb{R}^d \\) be the \\(d\\)-dimension feature of \\(i\\)-th sample in one mini-batch. The weight matrix in the classification layer is denoted as \\( W \mathbb{R}^{n \times d} \\), where \\( y = Wx+b\\).
+
 
 <a name='generalize'></a>
 
