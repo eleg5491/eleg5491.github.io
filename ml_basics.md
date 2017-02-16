@@ -64,7 +64,7 @@ $$
  $$
 
 The notation \\(\hat{y}_{i , l_i}\\) denotes the normalized probability output (scalar) corresponding to the \\(l_i\\)-th dimension in \\(\hat{y}_i\\), a.k.a, its  label index.
-In Caffe, the [softmax layer](http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SoftmaxWithLossLayer.html) is known as `SoftmaxWithLoss`.
+In Caffe, the [softmax loss](http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SoftmaxWithLossLayer.html) is known as `SoftmaxWithLoss`.
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/loss.png" height="220">
@@ -86,7 +86,7 @@ l_j \log \hat{y}_j + (1 - l_j ) \log ( 1- \hat{y}_j ),  \\
 \frac{\partial L}{\partial y_j } = \frac{\partial L}{\partial \hat{y}_j } \frac{\partial \hat{y}_j}{\partial y_j } = \hat{y}_j - l_j,
 $$
 
-where the label is now in a vector form: \\(l_i \in \mathbb{R}^n\\), with each element \\(l_j\\) being 0 or 1. The vector form of the gradient regarding sample \\(i\\) is \\( \frac{\partial L}{\partial y_i } (\hat{y}_i - l_i) \in \mathbb{R}^n\\). It is a little bit tedious in the derivations above, but we want students to be crystal clear about the gradient flow in each element of the data at the beginning. 
+where the label is now in a vector form: \\(l_i \in \mathbb{R}^n\\), with each element \\(l_j\\) being 0 or 1. The vector form of the gradient regarding sample \\(i\\) is \\( \frac{\partial L}{\partial y_i } = (\hat{y}_i - l_i) \in \mathbb{R}^n\\). It is a little bit tedious in the derivations above, but we want students to be crystal clear about the gradient flow in each element of data in the network. In Caffe, the [multi-class loss](http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SigmoidCrossEntropyLossLayer.html#details) is known as `SigmoidCrossEntropyLoss`.
 
 
 
