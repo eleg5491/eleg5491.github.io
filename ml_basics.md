@@ -64,7 +64,7 @@ $$
  $$
 
 The notation \\(\hat{y}_{i , l_i}\\) denotes the normalized probability output (scalar) corresponding to the \\(l_i\\)-th dimension in \\(\hat{y}_i\\), a.k.a, its  label index.
-
+In Caffe, the softmax layer is known as `[SoftmaxWithLoss](http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SoftmaxWithLossLayer.html)`.
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/loss.png" height="220">
@@ -73,6 +73,8 @@ The notation \\(\hat{y}_{i , l_i}\\) denotes the normalized probability output (
     <b>x</b> as input, we have a raw probability output <b>y</b>; the loss descends from a pair (<b>y</b>, label) and could be in various forms (Euclidean, hingeloss, softmax loss, etc.), depending on the input <b>y</b> and label.
   </div>
 </div>
+
+A very similar loss that often confuses beginners is the cross-entropy loss of independent multi-classes.
 
 <a name='generalize'></a>
 
