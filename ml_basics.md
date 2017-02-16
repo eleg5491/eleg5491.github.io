@@ -49,7 +49,7 @@ $$
 L(W, x_i, l_i) = - \sum_{j=1}^n (t_i)_j \log (\hat{y}_i)_j,
 $$
 
-where \\()\\
+where \\(\hat{y}_i \in \mathbb{R}^n\\) is the normalized probability of the output in the classification layer. \\((\cdot)_j\\) denotes the \\( j\\)-th element in a vector. Here \\(t_i \in \mathbb{R}^n\\) is a vectorized target mapping from a single scalar \\(l_i\\). For instance, in the example shown below, sample \\(x_i\\) belongs to class \\(l_i =2\\), thus its target vector is \\(t_i = [0, 0, 1]\\).
 
 <a name='generalize'></a>
 
