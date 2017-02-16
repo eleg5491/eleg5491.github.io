@@ -6,6 +6,7 @@ permalink: /ml_basics/
 <!-- ## Note on Machine Learning Basics -->
 
 Initial release: Jan 24, 2017. Hongyang Li.
+
 Update: Feb 16, 2017. Hongyang Li and Kai Kang. 
 
 Table of Contents:
@@ -36,7 +37,7 @@ Last week we talked about the fundamental concepts in machine learning, from gen
 
 ### Cross Entropy
 
-One of the most important thing in deep learning is to minimize the loss from the learned features and its corresponding label. Let \\( f_i \in \mathbb{R}^d \\) be the \\(d\\)-dimension feature of \\(i\\)-th sample in one mini-batch. The weight matrix in the classification layer is denoted as \\( W \mathbb{R}^{n \times d} \\), where \\( y = Wx+b\\).
+One of the most important thing in deep learning is to minimize the loss from the learned features and its corresponding label. Let \\( x_i \in \mathbb{R}^d \\) be the \\(d\\)-dimension feature of \\(i\\)-th sample in one mini-batch. The weight matrix in the classification layer is denoted as \\( W \in \mathbb{R}^{n \times d} \\), where \\( y_i = Wx_i+b\\). The label of sample \\( x_i \\) is \\( l_i \in \{ 0, 1, \cdots, K-1 \}\\).
 
 
 <a name='generalize'></a>
