@@ -64,7 +64,7 @@ $$
  $$
 
 The notation \\(\hat{y}_{i , l_i}\\) denotes the normalized probability output (scalar) corresponding to the \\(l_i\\)-th dimension in \\(\hat{y}_i\\), a.k.a, its  label index.
-In Caffe, the softmax layer is known as `[SoftmaxWithLoss](http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SoftmaxWithLossLayer.html)`.
+In Caffe, the [softmax layer](http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SoftmaxWithLossLayer.html) is known as `SoftmaxWithLoss`.
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/loss.png" height="220">
