@@ -57,15 +57,19 @@ $$
 $$
 
 
- It is in an element-wise form and we remove the subscript \\(i\\) for brevity. Hope you are not lost with the notations here. :)
+ It is in an element-wise form and we remove the subscript \\(i\\) for brevity. Hope you are not lost with the notations here. :) In a general sense, \\(t_j\\) can be continuous; in softmax loss, the target has only one element to be 1 and all the others as zero. That's why you often see the loss over a batch is written as:
 
+ $$
+ L(W, \mathcal{B}) = - \sum_{i=1} \log \hat{y}_{i l_i}.
+ $$
+The notation \\(\hat{y}_{i l_i}\\) denotes the single scalar of normalized probability output corresponding to the \\(l_i\\)-th dimension in \\(\hat{y}_i\\), aka, its correct label index.
 
 
 <div class="fig figcenter fighighlight">
   <img src="/assets/ml/loss.png" height="220">
   <div class="figcaption">
     The loss expression via a detailed example. Adaption from <a href="http://cs231n.github.io/linear-classify/#svmvssoftmax">a blog</a>. Taking the feature 
-    $x$ as input, we have a raw probability output y; the loss descends from a pair (y, label) and could be in various forms (Euclidean, hingeloss, softmax loss, etc.), depending on the input y and label.
+    <b>x</b> as input, we have a raw probability output <b>y</b>; the loss descends from a pair (<b>y</b>, label) and could be in various forms (Euclidean, hingeloss, softmax loss, etc.), depending on the input <b>y</b> and label.
   </div>
 </div>
 
