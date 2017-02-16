@@ -49,7 +49,16 @@ $$
 L(W, x_i, l_i) = - \sum_{j=1}^n (t_i)_j \log (\hat{y}_i)_j,
 $$
 
-where \\(\hat{y}_i \in \mathbb{R}^n\\) is the normalized probability of the output in the classification layer. \\((\cdot)_j\\) denotes the \\( j\\)-th element in a vector. Here \\(t_i \in \mathbb{R}^n\\) is a vectorized target mapping from a single scalar \\(l_i\\). For instance, in the example shown below, sample \\(x_i\\) belongs to class \\(l_i =2\\), thus its target vector is \\(t_i = [0, 0, 1]\\).
+where \\(\hat{y}_i \in \mathbb{R}^n\\) is the normalized probability of the output in the classification layer. \\((\cdot)_j\\) denotes the \\( j\\)-th element in a vector. Here \\(t_i \in \mathbb{R}^n\\) is a vectorized target mapping from a single scalar \\(l_i\\). For instance, in the example shown below, sample \\(x_i\\) belongs to class \\(l_i =2\\), thus its target vector is \\(t_i = [0, 0, 1]^T\\). The gradient of \\(L\\) w.r.t. input \\(\hat{y}_i\\) is \\( \frac{\partial L}{\partial \hat{y}_j } = -\frac{t_j}{\hat{y}_j} \\). It is in an element-wise form and we remove the subscript \\(i\\) for brevity. Hope you are not lost with the notations here. :)
+
+
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/ml/loss.png" height="250">
+  <div class="figcaption">
+    The loss expression via a detailed example. Adaption from <a href="http://cs231n.github.io/linear-classify/#svmvssoftmax">a blog</a>. Taking the feature x as input, we have a raw probability output y; the loss descends from a pair (y, label) and could be in various forms (Euclidean, hingeloss, softmax loss, etc.), depending on the input y and label.
+  </div>
+</div>
 
 <a name='generalize'></a>
 
