@@ -76,9 +76,11 @@ In Caffe, the [softmax layer](http://caffe.berkeleyvision.org/doxygen/classcaffe
 
 A very similar loss that often confuses beginners is the cross-entropy loss of independent multi-classes. Take the example above again, in softmax loss, the summation of \\(
 \hat{y}_i
-\\) is 1, indicating that the sample can belong to one class *only* (the input image is a dog, not a person/cat/desk, etc). It is a one-of-many classification problem. In multi-class loss (so I call it!), each element in the probability vector is independent and ranges from 0 to 1 via some mapping: \\(  
+\\) is 1, indicating that the sample can belong to one class *only* (the input image is a dog, not a person/cat/desk, etc). It is a **one-of-many** classification problem. In multi-class loss (so I call it!), each element in the probability vector is independent and ranges from 0 to 1 via some mapping: \\(  
 \hat{y}_i = \sigma(y_i) \in \mathbb{R}^n
-\\), where \\(\sigma(\cdot)\\) is a sigmoid function, for instance.
+\\), where \\(\sigma(\cdot)\\) is a sigmoid function, for instance. Therefore, \\(\hat{y}_i)\\ becomes \\( \hat{y}_i = [0.055, 0.703, 0.569]^T\\); each element could mean whether the sample has person or not, whether the scene is indoor or outdoor, whether the person is laughing or not, etc. It is a **multi-binary** classification problem.
+
+
 
 <a name='generalize'></a>
 
