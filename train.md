@@ -43,7 +43,7 @@ Although it is widely used in practice, there is no implicit evidence that why w
 
 <a name='xavier'></a>
 #### Xavier initialization
-Our derivation mainly following [xxx]. The idea is to keep the input and output of a layer with the same variance and the zero mean. A building block of a conventional neural network consists of a linear layer and an elementwise activation function $$f(\cdot)$$,
+Our derivation mainly following [Glorot and Bengio](http://www.jmlr.org/proceedings/papers/v9/glorot10a.html). The idea is to keep the input and output of a layer with the same variance and the zero mean. A building block of a conventional neural network consists of a linear layer and an elementwise activation function $$f(\cdot)$$,
 
 $$
 \begin{cases} 
