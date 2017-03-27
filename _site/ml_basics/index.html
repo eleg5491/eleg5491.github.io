@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Notes for ELEG5491 Introduction to Deep Learning</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Course materials and notes for CUHK ELEG5491: Introduction to Deep Learning.">
+    <link rel="canonical" href="http://localhost:4000/ml_basics/">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Google fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+
+    <!-- Google tracking -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-46895817-2', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+
+  <div class="wrap title-wrap">
+    <a class="site-title" href="/">Notes for ELEG5491 Introduction to Deep Learning</a>
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="post">
+
+  <header class="post-header">
+    <h1></h1>
+  </header>
+
+  <article class="post-content">
+  <!-- ## Note on Machine Learning Basics -->
+
+<p>Initial release: Jan 24, 2017. Hongyang Li.</p>
+
+<p>Update: Feb 16, 2017. Hongyang Li and Kai Kang.</p>
+
+<p>Table of Contents:</p>
+
+<ul>
+  <li><a href="#intro">Introduction</a></li>
+  <li><a href="#concept">Cross Entropy</a></li>
+  <li><a href="#generalize">Generalization</a>
+    <ul>
+      <li><a href="#cross">Relation to cross-validation</a></li>
+    </ul>
+  </li>
+  <li><a href="#overfit">Overfit and underfit</a></li>
+  <li><a href="#summary">Summary</a></li>
+</ul>
+
+<p><a name="intro"></a></p>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>Last week we talked about the fundamental concepts in machine learning, from generative/discriminative model, overfit/underfit, optimization and different types of losses. In this post we point out some similar conceptions that are easy to be confusing for beginners. In general, the tasks of machine learning are broadly divided into supervised and unsupervised learning, where the former is trained with labelled data (called <strong>supervision</strong>) to minimize the loss and thus achieve better test performance, and the latter invesitigates the underlying data pattern itself without the help of supervision. In the real-world, we have millions of billions data without any or with limited label (see <a href="https://research.google.com/youtube8m/">YouTube-8M dataset</a> from Google). Also we have semi-supervised learning where the supervision is partially included in the learning process and reinforcement learning where the target value in the loss is formulated via a careful design of reward and policy. 
+<!-- We will dig into details in the following lectures. --></p>
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/ml/ml_task.png" height="250" />
+  <div class="figcaption">
+    Machine learning tasks in broad categories. In this course, we mainly focus on the supervised learning where data are annotated with label and thus a training loss can be applied. With proper optimization method, we can obtain a set of deep learning features that can best represent the data pattern.
+  </div>
+</div>
+
+<p><a name="concept"></a></p>
+
+<h3 id="cross-entropy">Cross Entropy</h3>
+
+<p>One of the most important thing in deep learning is to minimize the loss from the learned features and its corresponding label. Let \( x_i \in \mathbb{R}^d \) be the \(d\)-dimension feature of \(i\)-th sample in one mini-batch. The weight matrix in the classification layer is denoted as \( W \in \mathbb{R}^{n \times d} \), where \( y_i = Wx_i+b\). The label of sample \( x_i \) is \( l_i \in { 0, 1, \cdots, n-1 }\), where \( n\) is the number of categories. The <a href="https://en.wikipedia.org/wiki/Cross_entropy">cross entropy</a> loss, in plain English, measures the difference between two probability distributions \(p\) and \(q\) over a given set:</p>
+
+<script type="math/tex; mode=display">H(p, q) = -\sum_x p(x) \log q(x).</script>
+
+<p>Putting the cross entropy loss into our notation defined above, it goes like:</p>
+
+<script type="math/tex; mode=display">L(W, x_i, l_i) = - \sum_{j=1}^n (t_i)_j \log (\hat{y}_i)_j,</script>
+
+<p>where \(\hat{y}_i \in \mathbb{R}^n\) is the normalized probability of the output in the classification layer. \((\cdot)_j\) denotes the \( j\)-th element in a vector. Here \(t_i \in \mathbb{R}^n\) is a vectorized target mapping from a single scalar \(l_i\). For instance, in the example shown below, sample \(x_i\) belongs to class \(l_i =2\), thus its target vector is \(t_i = [0, 0, 1]^T\). The total loss over a batch \(\mathcal{B}\) is just the summation over all samples: \(\sum_i L(W, x_i, l_i)\).
+The gradient of \(L\) w.r.t. input \(\hat{y}_i\) is:</p>
+
+<script type="math/tex; mode=display">\frac{\partial L}{\partial \hat{y}_j } = -\frac{t_j}{\hat{y}_j}.</script>
+
+<p>It is in an element-wise form and we remove the subscript \(i\) for brevity. Hope you are not lost with the notations here. :) In a general sense, \(t_j\) can be continuous; in softmax loss, the target has only one element to be 1 and all the others as zero. That’s why you often see the softmax (cross-entropy) loss over a batch is written as:</p>
+
+<script type="math/tex; mode=display">L(W, \mathcal{B}) = - \sum_{i=1} \log \hat{y}_{i , l_i}.</script>
+
+<p>The notation \(\hat{y}_{i , l_i}\) denotes the normalized probability output (scalar) corresponding to the \(l_i\)-th dimension in \(\hat{y}_i\), a.k.a, its  label index.
+In Caffe, the <a href="http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SoftmaxWithLossLayer.html">softmax loss</a> is known as <code class="highlighter-rouge">SoftmaxWithLoss</code>.</p>
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/ml/loss.png" height="220" />
+  <div class="figcaption">
+    The loss expression via a detailed example. Adaption from <a href="http://cs231n.github.io/linear-classify/#svmvssoftmax">a blog</a>. Taking the feature 
+    <b>x</b> as input, we have a raw probability output <b>y</b>; the loss descends from a pair (<b>y</b>, label) and could be in various forms (Euclidean, hingeloss, softmax loss, etc.), depending on the input <b>y</b> and label.
+  </div>
+</div>
+
+<p>A very similar loss that often confuses beginners is the cross-entropy loss of independent multi-classes. Take the example above again, in softmax loss, the summation of \(
+\hat{y}_i
+\) is 1, indicating that the sample can belong to one class <em>only</em> (the input image is a dog, not a person/cat/desk, etc). It is a <strong>one-of-many</strong> classification problem. In multi-class loss (so I call it!), each element in the probability vector is independent and ranges from 0 to 1 via some mapping: \(<br />
+\hat{y}_i = \sigma(y_i) \in \mathbb{R}^n
+\), where \(\sigma(\cdot)\) is a sigmoid function, for instance. Therefore, \(\hat{y}_i\) becomes \( \hat{y}_i = [0.055, 0.703, 0.569]^T\); each element could mean whether the sample has person or not, whether the scene is indoor or outdoor, whether the person is laughing or not, etc. It is a <strong>multi-binary</strong> classification problem. Using the notation defined above, the loss and gradient of multi-class are as follows (removing the sample index \(i\) for brevity):</p>
+
+<script type="math/tex; mode=display">L(W, x, l) = - \sum_{j=1}^n 
+l_j \log \hat{y}_j + (1 - l_j ) \log ( 1- \hat{y}_j ),  \\
+\frac{\partial L}{\partial y_j } = \frac{\partial L}{\partial \hat{y}_j } \frac{\partial \hat{y}_j}{\partial y_j } = \hat{y}_j - l_j,</script>
+
+<p>where the label is now in a vector form: \(l_i \in \mathbb{R}^n\), with each element \(l_j\) being 0 or 1. The vector form of the gradient regarding sample \(i\) is \( \frac{\partial L}{\partial y_i } = (\hat{y}_i - l_i) \in \mathbb{R}^n\). It is a little bit tedious in the derivations above, but we want students to be crystal clear about the gradient flow in each element of data in the network. In Caffe, the <a href="http://caffe.berkeleyvision.org/doxygen/classcaffe_1_1SigmoidCrossEntropyLossLayer.html#details">multi-class loss</a> is known as <code class="highlighter-rouge">SigmoidCrossEntropyLoss</code>.</p>
+
+<p><a name="generalize"></a></p>
+
+<h3 id="generalization">Generalization</h3>
+
+<p>The generalization ability of a machine learning algorithm describes how accurately an algorithm is able to predict outcome values for previously <em>unseen</em> data. The generalization error can be minimized by avoiding overfitting in the learning algorithm. A model is said to generalize well if its performance on the test set is high. The dataset for a standard procedure of supervised learning should contain <em>training</em>, <em>validation</em> and <em>test</em> set, where the validation set is for pruning hyperparameters and the test set is for verifying a model’s performance and generalization ability.</p>
+
+<ul>
+  <li>
+    <p>An example using training, validation and test sets: <a href="https://arxiv.org/abs/1506.01497">Faster RCNN</a>  (Sec. 4.2)</p>
+  </li>
+  <li>
+    <p>Another aspect to describe a model’s generalization is to train a network on one dataset and evaluate it directly to another test set which has different classes: see <a href="https://arxiv.org/pdf/1606.04446v1.pdf">a paper here</a> (Sec. 3.2)</p>
+  </li>
+</ul>
+
+<p><a name="cross"></a></p>
+
+<h4 id="relation-to-cross-validation">Relation to cross-validation</h4>
+
+<p>To be precise, there is a connection between generalization and stability (via cross-validation) of a learning algorithm.
+If an algorithm is symmetric (the order of inputs does not affect the result), has bounded loss and meets <a href="https://en.wikipedia.org/wiki/Generalization_error#Relation_to_stability">two stability conditions</a>, it will generalize. For details, please refer to <a href="https://en.wikipedia.org/wiki/Generalization_error">wiki</a>. Here we want to point out that in some cases, the generalization of a model could be also reflected by conducting cross-valiation. There are two common types: (a) Leave-\(p\)-out cross-validation, it involves using \(p\) observations as the validation set and the remaining observations as the training set. This is repeated on all ways to cut the original sample on a validation set and a training set. 
+(b) \(k\)-fold cross-validation, the original samples are <em>randomly</em> partitioned into \(k\) equal sized subsamples. Of the \(k\) subsamples, a single subsample is retained as the validation data for testing the model, and the remaining \(k − 1\) subsamples are used as training data. 
+The cross-validation process is then repeated \(k\) times (called <em>folds</em>). The \(k\) results from the folds can then be averaged to produce a single estimation. The advantage of this method is that all observations are used for both training and validation, and each observation is used for validation exactly once. 
+When \(k = n\) (the number of observations), the \(k\)-fold cross-validation is exactly the leave-one-out cross-validation.</p>
+
+<p><a name="overfit"></a></p>
+
+<h3 id="overfit-and-underfit">Overfit and underfit</h3>
+<p>The overfitting and underfitting problem is a common issue when training deep models. A brief and illustrative example is <a href="http://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html">here</a>. <strong>Underfiiting</strong> means the model cannot find a solution that fits the training samples well and thus is incapable of capturing the true pattern of data. <strong>Overfitting</strong> refers to the case where the learner fits the training data too well, aka, has larger model capacity; it also captures the data noise and loses the ability to generalize well on test data.</p>
+
+<div class="fig figcenter fighighlight">
+  <img src="/assets/ml/overfit_example.png" height="250" />
+  <div class="figcaption">
+    A 1-D polinomial regression problem. Underfit (left), proper fit (middle) and overfit (right). We calculate the mean squared error (MSE) on the validation set. The higher of MSE, the less likely the model generalizes correctly from the training data.
+  </div>
+</div>
+
+<p>Below we sum up some reasons and their (possible) solutions to tackle overfit and underfit.</p>
+
+<p>Reasons for underfit:</p>
+
+<ul>
+  <li>Model capacity is not large enough: increase layers, add more neurons, from AlexNet to ResNet, etc.</li>
+  <li>Hard to find global optimum or easy to get stuck at local minimum: try another initial point (adjust learning rate, momentum, etc.) or change learning policy (SGD, Adam, RMSProp, etc).</li>
+  <li>Improper training logistics: longer iteration, diversity samples of different classes in one iteration.</li>
+</ul>
+
+<p>Reasons for overfit:</p>
+
+<ul>
+  <li>
+    <p>The number of candidate functions to describe the model is too large. Without sufficient data, the learner cannot distinguish which one is the most appropriate one: <a href="https://deeplearningmania.quora.com/The-Power-of-Data-Augmentation-2">increase training data</a>.</p>
+  </li>
+  <li>
+    <p>Data is contaminated by noise and the model intends to be complicates in the parameter space: sparsify the network by adding penalty for complexity (known as <strong>regularization</strong>).</p>
+    <ul>
+      <li>An example for linear regression (L2 norm): 
+  <script type="math/tex">L(w, x, y) = \frac{1}{N}  \sum_{i} \big(  w x_i^{(train)} - y_i^{(train)} \big)^2 + \lambda \| w \| ^2</script></li>
+      <li>There are many other forms of regularization, for example, <a href="http://yann.lecun.com/exdb/publis/pdf/wan-icml-13.pdf">Dropout or DropConnect</a>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><a name="summary"></a></p>
+
+<h3 id="summary">Summary</h3>
+<p>The following figure shows a rough splitup of the feature learning methods, where CNN and RNN in the supervised domain will be explicitly explored in the following lectures. In essence, deep learning models are just another workaround to provide more powerful representation of features than the traditional counterparts (such as HOG, SIFT, etc.) and based on the expressive and automatic learned features, data patterns (class clustering, for example) can be better distinguished in higher dimensional space.</p>
+<div class="fig figcenter fighighlight">
+  <img src="/assets/ml/feature_learning.png" height="250" />
+  <div class="figcaption">
+    Taxonomy of feature learning methods. 
+    <!-- Deep neural networks are of the main interest in this course.  -->
+    Credit from <a href="https://sites.google.com/site/deeplearningcvpr2014/">Honglak Lee's Tutorial</a>.
+  </div>
+</div>
+
+<p>At last, the unsupervised methods will be briefly introduced in the upcoming lecture and you can find a good starting tutorial <a href="http://www.uoguelph.ca/~gwtaylor/outbox/gwt_unsupervised_learning.pdf">here</a>. The general knowledge discussed above are useful throughout this course and must be reflected when we publish professional research papers.</p>
+
+<p><br /><br /><br /></p>
+<div>
+  <div id="disqus_thread"></div>
+  <script>
+  /**
+  * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+  * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+  */
+  // var disqus_config = function () {
+  // this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+  // this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+  // };
+  (function() { // DON'T EDIT BELOW THIS LINE
+  var d = document, s = d.createElement('script');
+
+  s.src = '//hongyangblog.disqus.com/embed.js';
+
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</div>
+
+  </article>
+
+</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrap">
+
+    <div class="footer-col-1 column">
+      <ul>
+        
+        <li>
+          <a href="https://github.com/eleg5491">
+            <span class="icon github">
+              <svg version="1.1" class="github-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                <path fill-rule="evenodd" clip-rule="evenodd" fill="#C2C2C2" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761
+                c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32
+                c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472
+                c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037
+                C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65
+                c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261
+                c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082
+                c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129
+                c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            <span class="username">eleg5491</span>
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com/dl_cuhk">
+            <span class="icon twitter">
+              <svg version="1.1" class="twitter-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                <path fill="#C2C2C2" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27
+                c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767
+                c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206
+                C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271
+                c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469
+                c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+              </svg>
+            </span>
+            <span class="username">dl_cuhk</span>
+          </a>
+        </li>
+        <li>
+          <!-- <a href="mailto:"></a> -->
+          Design courtesy by <a href="http://cs231n.github.io/">cs231n notes</a>.
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-col-2 column">
+        
+    </div>
+
+    <div class="footer-col-3 column">
+      
+    </div>
+
+  </div>
+
+</footer>
+
+
+    <!-- mathjax -->
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>
